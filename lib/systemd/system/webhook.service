@@ -1,4 +1,4 @@
-# /usr/lib/systemd/system/webhook.service
+# /lib/systemd/system/webhook.service
 
 [Unit]
 Description=Webhook is a lightweight incoming webhook server
@@ -14,3 +14,6 @@ ExecReload=/bin/kill -s HUP webhookpid
 TimeoutSec=0
 RestartSec=2
 Restart=always
+
+[Install]
+WantedBy=multi-user.target
