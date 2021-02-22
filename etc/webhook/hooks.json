@@ -1,8 +1,8 @@
 [
   {
     "id": "imega-webrx/backend",
-    "execute-command": "<RUNNER>",
-    "command-working-directory": "<WORKDIR>",
+    "execute-command": "/root/deploy-backend.sh",
+    "command-working-directory": "/srv/backend",
     "trigger-rule": {
       "and": [
         {
@@ -18,20 +18,14 @@
         {
           "match": {
             "type": "value",
-            "value": "released",
+            "value": "refs/heads/master",
             "parameter": {
               "source": "payload",
-              "name": "action"
+              "name": "ref"
             }
           }
         }
       ]
-    },
-    "pass-arguments-to-command": [
-      {
-        "source": "payload",
-        "name": "release.assets.0.url"
-      }
-    ]
+    }
   }
 ]
