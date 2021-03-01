@@ -18,3 +18,5 @@ rm -rf /srv/www/webrx/*
 mv /root/frontend-master/build/* /srv/www/webrx/
 
 rm -rf /root/frontend-master
+
+curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage -d chat_id=$CHAT_GROUP -d text="frontend deployment is completed."
