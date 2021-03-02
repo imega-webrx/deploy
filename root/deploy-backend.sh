@@ -20,3 +20,5 @@ pm2 del /srv/backend/ecosystem.config.js
 pm2 start /srv/backend/ecosystem.config.js
 
 rm -rf /root/backend-master
+
+curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage -d chat_id=$CHAT_GROUP -d text="backend deployment is completed."
