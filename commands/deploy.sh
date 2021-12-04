@@ -9,7 +9,13 @@ curl -s https://codeload.github.com/imega-webrx/deploy/zip/master \
 unzip -x /root/tmp/deploy.zip
 rm -v /root/tmp/deploy.zip
 
-echo 22223
+diff -q /root/deploy/lib/systemd/system/webhook.service \
+    /lib/systemd/system/webhook.service || \
+    {
+        echo "Update /lib/systemd/system/webhook.service";
+        echo "Reload systemd"
+    }
+
 
 rm -rv /root/deploy
 mv -v /root/tmp/deploy-master /root/deploy
@@ -23,4 +29,4 @@ chmod +x -R /root/deploy/commands
 rm -rv /root/tmp
 
 curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
-    -d chat_id=$CHAT_GROUP -d text="deploy deployment is completed."
+    -d chat_id=$CHAT_GROUP -d text="Deploy deployment is completed.\nUpdate: /lib/systemd/system/webhook.service"
