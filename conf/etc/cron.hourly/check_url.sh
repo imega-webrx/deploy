@@ -23,6 +23,9 @@ assert 200 $ACTUAL "webrx.ru/playground - "
 ACTUAL=$(curl --write-out %{http_code} --silent --output /dev/null https://webrx.ru/dashboard)
 assert 200 $ACTUAL "webrx.ru/dashboard - "
 
+PM2=$(pm2 jlist | jq -r '.[] | .name + " - " + .pm2_env.status + ", mem: " + (.monit.memory/1024/1024|floor|tostring) + "MB" ')
+TEXT="${TEXT}${NL}${PM2}"
+
 curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
     --output /dev/null \
     -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
