@@ -1,4 +1,5 @@
 # /lib/systemd/system/webhook.service
+# Warning: if changed then run 'systemctl daemon-reload' to reload units.
 
 [Unit]
 Description=Webhook is a lightweight incoming webhook server
@@ -9,6 +10,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 EnvironmentFile=/etc/systemd/webhook
+EnvironmentFile=/root/.env
 ExecStart=/usr/bin/webhook -hooks=/etc/webhook/hooks.json $OPTS
 ExecReload=/bin/kill -s HUP webhookpid
 TimeoutSec=0
