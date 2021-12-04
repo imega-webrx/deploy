@@ -1,0 +1,163 @@
+[
+  {
+    "id": "imega-webrx/deploy",
+    "execute-command": "/root/deploy/commands/deploy.sh",
+    "command-working-directory": "/root/deploy/commands",
+    "trigger-rule": {
+      "and": [
+        {
+          "match": {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv `DEPLOY_SECRET_DEPLOY` }}",
+            "parameter": {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "refs/heads/master",
+            "parameter": {
+              "source": "payload",
+              "name": "ref"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "imega-webrx/backend",
+    "execute-command": "/root/deploy-backend.sh",
+    "command-working-directory": "/root",
+    "trigger-rule": {
+      "and": [
+        {
+          "match": {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv `DEPLOY_SECRET_BACKEND` }}",
+            "parameter": {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "refs/heads/master",
+            "parameter": {
+              "source": "payload",
+              "name": "ref"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "imega-webrx/frontend",
+    "execute-command": "/root/deploy-frontend.sh",
+    "command-working-directory": "/root",
+    "trigger-rule": {
+      "and": [
+        {
+          "match": {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv `DEPLOY_SECRET_FRONTEND` }}",
+            "parameter": {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "refs/heads/master",
+            "parameter": {
+              "source": "payload",
+              "name": "ref"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "imega-webrx/dashboard",
+    "execute-command": "/root/deploy-dashboard.sh",
+    "command-working-directory": "/root",
+    "trigger-rule": {
+      "and": [
+        {
+          "match": {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv `DEPLOY_SECRET_DASHBOARD` }}",
+            "parameter": {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "refs/heads/main",
+            "parameter": {
+              "source": "payload",
+              "name": "ref"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "imega-webrx/frontendpr",
+    "execute-command": "/root/push-frontend.sh",
+    "command-working-directory": "/root",
+    "trigger-rule": {
+      "and": [
+        {
+          "match": {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv `DEPLOY_SECRET_FRONTEND` }}",
+            "parameter": {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "opened",
+            "parameter": {
+              "source": "payload",
+              "name": "action"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "regex",
+            "regex": ".*",
+            "parameter": {
+              "source": "payload",
+              "name": "pull_request"
+            }
+          }
+        }
+      ]
+    },
+    "pass-arguments-to-command": [
+      {
+        "source": "payload",
+        "name": "pull_request.url"
+      }
+    ]
+  }
+]
