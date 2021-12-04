@@ -15,10 +15,13 @@ assert() {
 }
 
 ACTUAL=$(curl --write-out %{http_code} --silent --output /dev/null https://webrx.ru)
-assert 200 $ACTUAL "https://webrx.ru - "
+assert 200 $ACTUAL "webrx.ru - "
 
 ACTUAL=$(curl --write-out %{http_code} --silent --output /dev/null https://webrx.ru/playground)
-assert 200 $ACTUAL "https://webrx.ru/playground - "
+assert 200 $ACTUAL "webrx.ru/playground - "
+
+ACTUAL=$(curl --write-out %{http_code} --silent --output /dev/null https://webrx.ru/dashboard)
+assert 200 $ACTUAL "webrx.ru/dashboard - "
 
 curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
     --output /dev/null \
