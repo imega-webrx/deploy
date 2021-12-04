@@ -88,7 +88,7 @@
   },
   {
     "id": "imega-webrx/dashboard",
-    "execute-command": "/root/deploy-dashboard.sh",
+    "execute-command": "/root/deploy/commands/deploy-dashboard.sh",
     "command-working-directory": "/root",
     "trigger-rule": {
       "and": [
