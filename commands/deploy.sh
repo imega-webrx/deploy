@@ -16,6 +16,9 @@ mv -v /root/tmp/deploy-master /root/deploy
 chmod +x -R /root/deploy/commands
 rm -rv /root/tmp
 
+chmod +x -R /root/deploy/conf/etc/cron.hourly
+cp -v /root/deploy/conf/etc/cron.hourly/check_url.sh /etc/cron.hourly
+
 RELOAD_SYSTEMCTL=false
 diff -q /root/deploy/conf/lib/systemd/system/webhook.service \
     /lib/systemd/system/webhook.service || \
