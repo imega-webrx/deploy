@@ -26,5 +26,5 @@ chmod +x -R /root/deploy/commands
 
 rm -rv /root/tmp
 
-curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
+curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage?parse_mode=html \
     -d chat_id=$CHAT_GROUP -d text="Deploy deployment is completed.\nUpdate: /lib/systemd/system/webhook.service"
