@@ -23,7 +23,6 @@ diff -q /root/deploy/lib/systemd/system/webhook.service \
         systemctl daemon-reload && TEXT="${TEXT}Ok" || TEXT="${TEXT}Fail"
     }
 
-
 rm -rv /root/deploy
 mv -v /root/tmp/deploy-master /root/deploy
 
