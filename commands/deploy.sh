@@ -9,7 +9,7 @@ curl -s https://codeload.github.com/imega-webrx/deploy/zip/master \
 unzip -x /root/tmp/deploy.zip
 rm /root/deploy/deploy.zip
 rm -rv /root/deploy
-mv /root/tmp/deploy-master /root/deploy
+mv -v /root/tmp/deploy-master /root/deploy
 
 echo 11111
 
