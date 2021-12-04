@@ -11,6 +11,8 @@ rm /root/deploy/deploy.zip
 rm -rv /root/deploy
 mv /root/tmp/deploy-master /root/deploy
 
+echo 11111
+
 chmod +x -R /root/deploy/commands
 
 # systemctl restart webhook
