@@ -1,5 +1,5 @@
 #!/bin/bash -x
-set -o allexport; source .env; set +o allexport
+set -o allexport; source /root/.env; set +o allexport
 
 TEXT="<b>Deploy deployment is completed</b>"
 NL="%0A"
