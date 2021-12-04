@@ -17,9 +17,10 @@ diff -q /root/deploy/lib/systemd/system/webhook.service \
     {
         echo "Update /lib/systemd/system/webhook.service";
         TEXT="${TEXT}${NL}Update: /lib/systemd/system/webhook.service - "
+
         echo "Reload systemd"
         TEXT="${TEXT}${NL}Reload systemd: "
-        systemctl restart webhook && TEXT="${TEXT}Ok" || TEXT="${TEXT}Fail"
+        systemctl daemon-reload && TEXT="${TEXT}Ok" || TEXT="${TEXT}Fail"
     }
 
 
