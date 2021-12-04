@@ -1,5 +1,6 @@
-# /etc/sysconfig/webhook
+# /etc/systemd/webhook
 #
 # https://github.com/adnanh/webhook/blob/master/docs/Webhook-Parameters.md
 
-OPTS=-nopanic
+#OPTS=-nopanic
+OPTS=-template -verbose
