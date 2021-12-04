@@ -30,7 +30,6 @@ chmod +x -R /root/deploy/commands
 
 # systemctl restart webhook
 
-
 rm -rv /root/tmp
 
 curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
