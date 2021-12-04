@@ -15,9 +15,12 @@ assert() {
 }
 
 ACTUAL=$(curl --write-out %{http_code} --silent --output /dev/null https://webrx.ru)
+assert 200 $ACTUAL "https://webrx.ru - "
 
-assert 200 $ACTUAL "webrx.ru - "
+ACTUAL=$(curl --write-out %{http_code} --silent --output /dev/null https://webrx.ru/playground)
+assert 200 $ACTUAL "https://webrx.ru/playground - "
 
 curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
+    --output /dev/null \
     -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
     -d chat_id=$CHAT_GROUP -d parse_mode=HTML -d text="${TEXT}"
