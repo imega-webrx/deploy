@@ -39,7 +39,7 @@ diff -q /root/deploy/conf/etc/systemd/webhook \
         RELOAD_SYSTEMCTL=true
     }
 
-RELOAD_SYSTEMCTL && {
+$RELOAD_SYSTEMCTL && {
     echo "Reload systemd";
     TEXT="${TEXT}${NL}Reload systemd: ";
     systemctl daemon-reload && TEXT="${TEXT}Ok" || TEXT="${TEXT}<b>Fail</b>"
@@ -69,7 +69,7 @@ diff -q /root/deploy/conf/etc/nginx/conf.d/webrx.ru.conf \
         RELOAD_NGINX=true
     }
 
-RELOAD_NGINX && {
+$RELOAD_NGINX && {
     echo "Reload nginx";
     TEXT="${TEXT}${NL}Reload nginx: ";
     systemctl reload nginx && TEXT="${TEXT}Ok" || TEXT="${TEXT}<b>Fail</b>"
@@ -93,4 +93,4 @@ curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
     -H "Content-Type: application/x-www-form-urlencoded; charset=utf-8" \
     -d chat_id=$CHAT_GROUP -d parse_mode=HTML -d text="${TEXT}"
 
-RESTART_WEBHOOK && systemctl restart webhook
+$RESTART_WEBHOOK && systemctl restart webhook
